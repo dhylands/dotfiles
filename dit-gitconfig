@@ -1,0 +1,10 @@
+[user]
+	name = Dave Hylands
+	email = dhylands@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[alias]
+	status-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\" | grep Hylands
+	summary-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\"
