@@ -13,6 +13,12 @@
 scriptname=$(basename $0)
 scriptdir=$(dirname $0)
 
+if [ "$1" == "-t" ]; then
+    TEST=echo
+else
+    TEST=
+fi
+
 LOG=/var/log/backup-last-run.log
 REAL_LOG=/var/log/backup.log
 
@@ -33,7 +39,7 @@ case ${HOSTNAME} in
     # These machines are always attached to the network, so don't
     # need the wireless check
 
-    dave-ubuntu|dave|dave-moz)
+    dave-ubuntu|dave|dave-work|dave-moz)
         CHECK_WIRELESS=0
         ;;
 
@@ -97,7 +103,7 @@ currTime=$(date '+%s')
 #
 
 echo "$(date): Started daily rsnapshot" >> ${LOG}
-nice /usr/bin/rsnapshot -v daily >> ${LOG} 2>&1
+${TEST} nice /usr/bin/rsnapshot -v daily >> ${LOG} 2>&1
 echo "$(date): Finished daily rsnapshot" >> ${LOG}
 
 weekStamp=$(find ${BACKUP_DIR}/ -maxdepth 1 -name weekly.0 -printf '%T@\n')
@@ -110,7 +116,7 @@ then
     # and daily.6 is already a week old
 
     echo "$(date): Started weekly rsnapshot" >> ${LOG}
-    nice /usr/bin/rsnapshot -v weekly >> ${LOG} 2>&1
+    ${TEST} nice /usr/bin/rsnapshot -v weekly >> ${LOG} 2>&1
     echo "$(date): Finished weekly rsnapshot" >> ${LOG}
 fi
 
@@ -123,7 +129,7 @@ then
     # weekly.4 will become monthly.0
 
     echo "$(date): Started monthly rsnapshot" >> ${LOG}
-    nice /usr/bin/rsnapshot -v monthly >> ${LOG} 2>&1
+    ${TEST} nice /usr/bin/rsnapshot -v monthly >> ${LOG} 2>&1
     echo "$(date): Finished monthly rsnapshot" >> ${LOG}
 fi
 
