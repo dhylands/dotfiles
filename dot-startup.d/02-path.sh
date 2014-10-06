@@ -6,26 +6,36 @@
 # environment using the 'sp' alias.
 #
 
+function PathPresent()
+{
+    local   add_dir="$1"
+    local   dir
+    local   sv_ifs=${IFS}
+    IFS=:
+
+    for dir in ${PATH}
+    do
+        if [ "${dir}" == "${add_dir}" ]
+        then
+            IFS=${sv_ifs}
+            return 0
+        fi
+    done
+    IFS=${sv_ifs}
+    return 1
+}
+
 function AddPath()
 {
-    local   sv_ifs=${IFS}
-    local   dir
     local   add_dir="$1"
-
-    IFS=:
 
     if [ -d "${add_dir}" ]
     then
-        for dir in ${PATH}
-        do
-            if [ "${dir}" == "${add_dir}" ]
-            then
-                # Path is already there - nothing to do
-                IFS=${sv_ifs}
-                return
-            fi
-        done
-
+        if PathPresent "${add_dir}"
+        then
+            # Path is already there - nothing to do
+            return
+        fi
         if [ -z "${PATH}" ]
         then
             PATH="${add_dir}"
@@ -33,12 +43,32 @@ function AddPath()
             PATH=${PATH}:"${add_dir}"
         fi
     fi
-    IFS=${sv_ifs}
+}
+
+function PrependPath()
+{
+    local   add_dir="$1"
+
+    if [ -d "${add_dir}" ]
+    then
+        if PathPresent "${add_dir}"
+        then
+            # Path is already there - nothing to do
+            return
+        fi
+        if [ -z "${PATH}" ]
+        then
+            PATH="${add_dir}"
+        else
+            PATH="${add_dir}":${PATH}
+        fi
+    fi
 }
 
 PATH=''
 AddPath "${HOME}/bin"
 AddPath "${HOME}/utils"
+#AddPath "${HOME}/local/bin"
 AddPath '/usr/local/bin'
 AddPath '/usr/local/bin'
 AddPath '/usr/local/sbin'
@@ -56,6 +86,8 @@ case "$(uname)" in
         AddPath "/opt/slickedit/bin"
         AddPath "/opt/CodeSourcery/Sourcery_G++_Lite/bin"
         AddPath "${HOME}/.wine/drive_c/WinAVR-20100110/bin"
+        #AddPath "${HOME}/stm/gcc-arm-none-eabi-4_8-2013q4/bin"
+        AddPath "${HOME}/stm/gcc-arm-none-eabi-4_8-2014q2/bin"
         ;;
 
     CYGWIN*)
