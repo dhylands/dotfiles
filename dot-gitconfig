@@ -8,3 +8,5 @@
 [alias]
 	status-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\" | grep Hylands
 	summary-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\"
+[core]
+	editor = vi
