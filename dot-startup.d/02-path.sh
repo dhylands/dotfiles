@@ -90,6 +90,10 @@ case "$(uname)" in
         AddPath "${HOME}/stm/gcc-arm-none-eabi-4_8-2014q2/bin"
         ;;
 
+    Darwin)
+        AddPath "${HOME}/stm/gcc-arm-none-eabi-4_9-2015q1/bin"
+        ;;
+
     CYGWIN*)
         AddPath '/c/WinAVR/bin'
         AddPath '/c/Program Files/CodeSourcery/Sourcery G++/bin'

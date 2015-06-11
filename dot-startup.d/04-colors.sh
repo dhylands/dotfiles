@@ -35,8 +35,12 @@ DARK_YELLOW="\[\033[2;33m\]"
 DARK_CYAN="\[\033[2;36m\]"
 NO_COLOR="\[\033[0m\]"
 
-#
-# NOTE: dircolors is sensitive to the setting of the TERM environment variable
-#
-eval `dircolors --sh ~/.dircolors`
-
+if [ "$(uname)" == "Darwin" ]; then
+    export CLICOLOR=1
+    export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+else
+    #
+    # NOTE: dircolors is sensitive to the setting of the TERM environment variable
+    #
+    eval `dircolors --sh ~/.dircolors`
+fi

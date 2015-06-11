@@ -22,6 +22,10 @@ case "$(uname)" in
     Linux)
         osName=linux
         ;;
+
+    Darwin)
+        osName=osx
+        ;;
 esac
 
 function InstallDir

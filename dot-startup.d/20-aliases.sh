@@ -50,14 +50,22 @@ function egrsi
 
 alias  bls=/bin/ls
 
-if [ -z "${VSLICKPATH}" ]
-then
-   alias  ls='ls --color=auto -F'
+if [ "$(uname)" == "Darwin" ]; then
+    ADD_COLOR='-G'
+    OMIT_GROUP='-o'
 else
-   alias  ls='ls --color=auto -F -C --width=105'
+    ADD_COLOR='--color=auto'
+    OMIT_GROUP='-G'
 fi
 
-alias  ll='ls -alG'
+if [ -z "${VSLICKPATH}" ]
+then
+   alias  ls="ls ${ADD_COLOR} -F"
+else
+   alias  ls="ls ${ADD_COLOR} -F -C --width=105"
+fi
+
+alias  ll="ls -al ${OMIT_GROUP}"
 alias  llr='ll -R'
 alias  m='less -r'
 alias  md='mkdir'
