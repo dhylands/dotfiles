@@ -71,7 +71,7 @@ if [ "$(uname)" == "Darwin" ]; then
     #   11.  directory writable to others, without sticky bit
 
     #               1 2 3 4 5 6 7 8 9 1011
-    export LSCOLORS=GxBxhxDxCxhxhxHBhdhcGc
+    export LSCOLORS=GxGxhxDxCxhxhxHBhdhcGc
 else
     #
     # NOTE: dircolors is sensitive to the setting of the TERM environment variable
