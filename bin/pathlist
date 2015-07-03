@@ -16,7 +16,7 @@ do
    then
       echo -e "${GREEN}${dir}${NO_COLOR}"
    else
-      echo -e "${RED}${dir}${NO_COLOR} - doesn't exist"
+      echo -e "${RED}${dir}${NO_COLOR} - doesn't exist (or isn't a directory)"
    fi
 done
 
