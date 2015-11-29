@@ -96,6 +96,14 @@ function InstallDir
                     fi
                     ;;
 
+                *-osx.sh)
+                    if [ "${osName}" = "osx" ]
+                    then
+                        installThisFile=1
+                        dstFile=${dstFile%-osx.sh}.sh
+                    fi
+                    ;;
+
                 *)
                     installThisFile=1
                     ;;
