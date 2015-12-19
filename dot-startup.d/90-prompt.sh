@@ -32,7 +32,8 @@ then
 else
     if [ -z "${VSLICKPATH}" ]
     then
-       export PS1="\[\033]0;\W - \u@\h \w\007\]\[\033[0;32m\]${PROMPT_USER_COLOR}\u@\h ${PROMPT_PATH_COLOR}\w ${PROMPT_BRANCH_COLOR}\$(__git_ps1 ' (%s)')\n${PROMPT_USER_COLOR}\! >${NO_COLOR}"
+       TITLEBAR="\[\033]0;\W - \u@\h \w\007\]"
+       export PS1="${TITLEBAR}${PROMPT_USER_COLOR}\u@\h ${NO_COLOR}${PROMPT_PATH_COLOR}\w ${NO_COLOR}${PROMPT_BRANCH_COLOR}\$(__git_ps1 '(%s)')${NO_COLOR}\n${PROMPT_USER_COLOR}\! >${NO_COLOR}"
     else
        export PS1="\! \w>"
     fi
