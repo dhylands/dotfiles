@@ -80,19 +80,19 @@ function InstallDir
             installThisFile=0
             case "${srcFile}" in
 
-                *-cygwin.sh)
+                *-cygwin*)
                     if [ "${osName}" = "cygwin" ]
                     then
                         installThisFile=1
-                        dstFile=${dstFile%-cygwin.sh}.sh
+                        dstFile=${dstFile/-cygwin/}
                     fi
                     ;;
 
-                *-linux.sh)
+                *-linux)
                     if [ "${osName}" = "linux" ]
                     then
                         installThisFile=1
-                        dstFile=${dstFile%-linux.sh}.sh
+                        dstFile=${dstFile/-linux/}
                     fi
                     ;;
 
@@ -100,7 +100,7 @@ function InstallDir
                     if [ "${osName}" = "osx" ]
                     then
                         installThisFile=1
-                        dstFile=${dstFile%-osx.sh}.sh
+                        dstFile=${dstFile/-osx}
                     fi
                     ;;
 
