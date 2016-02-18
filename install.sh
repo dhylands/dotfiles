@@ -88,7 +88,7 @@ function InstallDir
                     fi
                     ;;
 
-                *-linux)
+                *-linux*)
                     if [ "${osName}" = "linux" ]
                     then
                         installThisFile=1
@@ -96,7 +96,7 @@ function InstallDir
                     fi
                     ;;
 
-                *-osx.sh)
+                *-osx*)
                     if [ "${osName}" = "osx" ]
                     then
                         installThisFile=1
