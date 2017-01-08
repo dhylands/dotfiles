@@ -1,0 +1,6 @@
+--ignore-directory=build*
+--type-add=rc=.rc
+--type-add=idl=.idl
+--type-add=ipdl=.ipdl
+--type-add=webidl=.webidl
+--type-add=jsm=.jsm
