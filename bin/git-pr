@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: git pr [clean] [<remote>] <id-or-url>"
+    echo ""
+    echo "Examples:"
+    echo "git pr 42                                              -->  git fetch origin pull/42/head:pr/origin/42"
+    echo "git pr upstream 42                                     -->  git fetch upstream pull/42/head:pr/upstream/42"
+    echo "git pr https://github.com/peerigon/phridge/pull/1      -->  git fetch https://github.com/peerigon/phridge.git pull/1/head:pr/peerigon/phridge/1"
+    echo "git pr clean                                           -->  Deletes all branches that match pr/*/* and pr/*/*/*"
+    exit 1
+elif [ -z "$2" ]; then
+    id=$1
+    remote=origin
+else
+    id=$2
+    remote=$1
+fi
+
+if [[ $id = "clean" ]]; then
+    git for-each-ref refs/heads/pr/*/* refs/heads/pr/*/*/* --format='%(refname)' | while read ref; do
+        echo "git branch -D ${ref#refs/heads/}"
+        git branch -D ${ref#refs/heads/}
+    done
+    exit 0
+elif [[ $id =~ ^(https?://[^/]+/(.+))/pull/([0-9]+).*$ ]]; then
+    remote=${BASH_REMATCH[1]}.git
+    id=${BASH_REMATCH[3]}
+    branch=pr/${BASH_REMATCH[2]}/$id
+else
+    branch=pr/$remote/$id
+fi
+
+
+echo "git fetch -fu $remote pull/$id/head:$branch"
+git fetch -fu $remote pull/$id/head:$branch
+git checkout $branch
