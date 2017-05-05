@@ -1,0 +1,5 @@
+#!/bin/sh
+
+PORT=$(find_port.py "$@")
+echo "Opening '${PORT}'"
+picocom --baud=115200 --send-cmd sz --receive-cmd lrz ${PORT}
