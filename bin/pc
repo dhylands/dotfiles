@@ -1,5 +1,9 @@
 #!/bin/sh
 
 PORT=$(find_port.py "$@")
-echo "Opening '${PORT}'"
-picocom --baud=115200 --send-cmd sz --receive-cmd lrz ${PORT}
+if [ "x${PORT}" == "x" ]; then
+    echo "No USB serial port found"
+else
+    echo "Opening '${PORT}'"
+    picocom --baud=115200 --send-cmd sz --receive-cmd lrz ${PORT}
+fi
