@@ -75,7 +75,6 @@ alias  ren='cmd /c ren'
 alias  rehash='hash -r'
 alias  which='type'
 alias  whereis='type'
-alias  open='cygstart'
 
 alias  sa='. ~/.startup.d/20-aliases.sh'
 alias  sb='. ~/.bashrc'
