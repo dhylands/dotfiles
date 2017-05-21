@@ -46,6 +46,9 @@ def is_usb_serial(port, args):
     if not args.serial is None:
         if not port.serial_number.startswith(args.serial):
             return False
+    if not args.intf is None:
+        if port.interface is None or not args.intf in port.interface:
+            return False
     return True
 
 
@@ -57,6 +60,8 @@ def extra_info(port):
         extra_items.append("vendor '{}'".format(port.manufacturer))
     if port.serial_number:
         extra_items.append("serial '{}'".format(port.serial_number))
+    if port.interface:
+        extra_items.append("intf '{}'".format(port.interface))
     if extra_items:
         return ' with ' + ' '.join(extra_items)
     return ''
@@ -106,6 +111,13 @@ def main():
         dest="vid",
         action="store",
         help="Only show device with indicated VID",
+        default=None
+    )
+    parser.add_argument(
+        '-i', '--intf',
+        dest='intf',
+        action='store',
+        help='Shows devices which conatin the indicated interface string',
         default=None
     )
     args = parser.parse_args(sys.argv[1:])
