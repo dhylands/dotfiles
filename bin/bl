@@ -1,0 +1,12 @@
+#!/bin/bash
+# Puts a micropython board in booloader mode.
+
+PORT=$(find_port.py -n MicroPython)
+if [ -z "${PORT}" ]; then
+  echo "No MicroPython device found"
+  echo "Available Devices:"
+  find_port.py -l
+  exit 1
+fi
+~/micropython/micropython/tools/pyboard.py --device "${PORT}" -c 'import pyb; pyb.bootloader()' >& /dev/null
+
