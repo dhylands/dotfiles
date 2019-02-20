@@ -1,0 +1,3 @@
+0  8  * * * ${HOME}/bin/unmute.sh >> ${HOME}/bin/mute.log
+30 21 * * * ${HOME}/bin/mute.sh >> ${HOME}/bin/mute.log
+
