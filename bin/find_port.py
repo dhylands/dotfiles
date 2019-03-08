@@ -11,7 +11,7 @@ You can also add the following filters:
 --vid 2341      Will only match devices with a Vendor ID of 2341.
 --pid 0001      Will only match devices with a Product ID of 0001
 --vendor Micro  Will only match devices whose vendor name starts with Micro
---seral  00123  Will only match devices whose serial number stats with 00123
+--seral  00123  Will only match devices whose serial number starts with 00123
 
 If you use -l or --list then detailed information about all of the matches
 will be printed. If you don't use -l (or --list) then only the name of
@@ -133,7 +133,7 @@ def main():
         detected = False
         for port in serial.tools.list_ports.comports():
             if is_usb_serial(port, args):
-                print('USB Serial Device {}:{}{} found @{}\r'.format(
+                print('USB Serial Device {:04x}:{:04x}{} found @{}\r'.format(
                     port.vid, port.pid,
                     extra_info(port), port.device))
                 detected = True
