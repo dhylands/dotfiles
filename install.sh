@@ -44,11 +44,11 @@ function InstallDir
 
         srcBase=$(basename ${srcFile})
         
-        if [ "${srcBase}" = "install.sh" ]
+        if [ "${srcBase}" = "install.sh" -o "${srcBase}" = "README.md" ]
         then
             # That's this file - skip it
             
-            ${verbose} && echo "-- Skipping install.sh"
+            ${verbose} && echo "-- Skipping ${srcBase}"
             continue
         fi
 

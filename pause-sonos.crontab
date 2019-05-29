@@ -1,1 +1,0 @@
-0 22 * * * ${HOME}/bin/pause-sonos.sh >> ${HOME}/bin/pause-sonos.log
