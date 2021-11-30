@@ -6,8 +6,8 @@
 	status = auto
 	branch = auto
 [alias]
-	status-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\" | grep Hylands
-	summary-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %cn %Cgreen%cr%Creset %s'\"
+	status-report = !sh -c \"git log --color=always --pretty='%C(yellow)%h%Creset %an %Cgreen%ci%Creset %s'\" | grep Hylands
+	summary-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %an %Cgreen%ci%Creset %s'\"
 [core]
 	editor = vi
 [push]
