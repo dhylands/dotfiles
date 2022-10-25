@@ -1,9 +1,18 @@
 #!/bin/sh
 #
-# Looks for a vpn conenction and allows it to be brought up/down
-# from the command line. This assumes that there is only one
-# vpn connection present in the list.
+# Looks for a VPN connection (assumes that there is only 1)
+# and allows it to be brought up/down via the command line.
 #
+# Additional VPN setup notes:
+#   For Network Manager, I got the following to work.
+#   In Settings -> Network -> VPN click the gear icon beside the VPN connection
+#   and tick "Use this connection only for resources on its network' for both
+#   the IPv4 and IPv6 tabs. Then from the command line enter the command
+#   nmcli con modify pfSense-<Fill in your connection name here> ipv4.dns-search kepler.gdn,sat,kepler.internal,pfsense.kepler,kepler.engineering,kepler.lan
+#   The nmcli command is a one-time thing. It survives across up/down/reboot.
+#   Once you've done that I verified that could access wiki.kepler.lan and
+#   traceroute www.yahoo.com showed me that the packets were going out to my
+#   ISP and not through 10.x.x.x.
 
 CMD="$1"
 VPN_ID=$(nmcli con | grep ' vpn ' | cut -f 1 -d' ')
