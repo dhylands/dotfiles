@@ -67,6 +67,9 @@ def extra_info(port):
     return ''
 
 
+def auto_int(str):
+    return int(str, 0)
+
 def main():
     """The main program."""
     parser = argparse.ArgumentParser(
@@ -95,6 +98,7 @@ def main():
     parser.add_argument(
         "--pid",
         dest="pid",
+        type=auto_int,
         action="store",
         help="Only show device with indicated PID",
         default=None
@@ -109,6 +113,7 @@ def main():
     parser.add_argument(
         "--vid",
         dest="vid",
+        type=auto_int,
         action="store",
         help="Only show device with indicated VID",
         default=None
