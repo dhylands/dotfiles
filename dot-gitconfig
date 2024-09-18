@@ -8,6 +8,8 @@
 [alias]
 	status-report = !sh -c \"git log --color=always --pretty='%C(yellow)%h%Creset %an %Cgreen%ci%Creset %s'\" | grep Hylands
 	summary-report = !sh -c \"git log --pretty='%C(yellow)%h%Creset %an %Cgreen%ci%Creset %s'\"
+    find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+
 [core]
 	editor = vi
 [push]
