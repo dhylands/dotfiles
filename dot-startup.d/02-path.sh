@@ -103,6 +103,21 @@ case "$(uname)" in
         #needed for netsh
         AddPath '/c/WINDOWS/system32/Wbem'
         ;;
+    MINGW*)
+        AddPath "${HOME}/bin"
+        AddPath '/mingw64/bin'
+        AddPath '/usr/local/bin'
+        AddPath '/usr/bin'
+        AddPath '/bin'
+        AddPath '/c/Windows/system32'
+        AddPath '/c/Windows'
+        AddPath '/c/Windows/System32/Wbem'
+        AddPath '/c/Windows/System32/WindowsPowerShell/v1.0'
+        AddPath '/c/Windows/System32/OpenSSH'
+        AddPath '/cmd'
+        AddPath "${HOME}/AppData/Local/Microsoft/WindowsApps"
+        AddPath "${HOME}/AppData/Local/Programs/Microsoft VS Code/bin"
+        ;;
 esac
 
 export PATH

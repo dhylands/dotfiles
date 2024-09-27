@@ -8,7 +8,11 @@
 
 export SVN_EDITOR=vi
 
-export TERM=ansi
+if [[ "$(uname)" =~ MINGW ]]; then
+    export TERM=cygwin
+else
+    export TERM=ansi
+fi
 
 export ENV_INCLUDED=1
 

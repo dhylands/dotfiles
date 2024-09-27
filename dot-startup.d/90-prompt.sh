@@ -33,7 +33,11 @@ else
     if [ -z "${VSLICKPATH}" ]
     then
        TITLEBAR="\[\033]0;\W - \u@\h \w\007\]"
-       export PS1="${TITLEBAR}${PROMPT_USER_COLOR}\u@\h ${NO_COLOR}${PROMPT_PATH_COLOR}\w ${NO_COLOR}${PROMPT_BRANCH_COLOR}\$(__git_ps1 '(%s)')${NO_COLOR}\n${PROMPT_USER_COLOR}\! >${NO_COLOR}"
+       if [[ "$(uname)" =~ MINGW ]]; then
+           export PS1="${TITLEBAR}${PROMPT_USER_COLOR}\u@\h ${NO_COLOR}${PROMPT_PATH_COLOR}\w ${NO_COLOR}${PROMPT_BRANCH_COLOR}"'`__git_ps1`'"${NO_COLOR}\n${PROMPT_USER_COLOR}\! >${NO_COLOR}"
+        else
+            export PS1="${TITLEBAR}${PROMPT_USER_COLOR}\u@\h ${NO_COLOR}${PROMPT_PATH_COLOR}\w ${NO_COLOR}${PROMPT_BRANCH_COLOR}\$(__git_ps1 '(%s)')${NO_COLOR}\n${PROMPT_USER_COLOR}\! >${NO_COLOR}"
+        fi
     else
        export PS1="\! \w>"
     fi
