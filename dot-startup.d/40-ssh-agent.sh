@@ -12,7 +12,7 @@
 SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
-     privkey=~/.ssh/id-rsa-$(hostname)
+     privkey=~/.ssh/id-$(hostname)
      if [ ! -e "${privkey}" ]
      then
         echo "Unable to find SSH private key: '${privkey}'"

@@ -14,3 +14,5 @@
 	editor = vi
 [push]
 	default = simple
+[rebase]
+	updateRefs = true
